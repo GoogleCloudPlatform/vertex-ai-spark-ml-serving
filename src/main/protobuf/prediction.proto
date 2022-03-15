@@ -1,0 +1,64 @@
+/*
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+package com.google.cloud.aiplatform.mleap;
+
+import "google/protobuf/struct.proto";
+
+message PredictionRequest {
+   repeated .google.protobuf.ListValue instances = 1;
+   PredictionParameters parameters = 2;
+}
+
+message PredictionResponse {
+   repeated .google.protobuf.ListValue predictions = 1;
+}
+
+message PredictionParameters {
+   int32 maxResults = 1;
+   double minScore = 2;
+}
+
+message PredictionConfig {
+   PredictionSchema schema = 1;
+}
+
+message PredictionSchema {
+   repeated PredictionSchemaField input = 1;
+   repeated PredictionSchemaField output = 2;
+}
+
+message PredictionSchemaField {
+   enum FieldType {
+      INTEGER = 0;
+      BOOLEAN = 1;
+      BYTE = 2;
+      SHORT = 3;
+      LONG = 4;
+      FLOAT = 5;
+      DOUBLE = 6;
+      STRING = 7;
+   }
+   enum FieldStruct {
+      BASIC = 0;
+      ARRAY = 1;
+      VECTOR = 2;
+   }
+   string name = 1;
+   FieldType type = 2;
+   FieldStruct struct = 3;
+}

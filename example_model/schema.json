@@ -1,0 +1,27 @@
+{
+  "input": [
+    {
+      "name": "sepal_length",
+      "type": "FLOAT"
+    },
+    {
+      "name": "sepal_width",
+      "type": "FLOAT"
+    },
+    {
+      "name": "petal_length",
+      "type": "FLOAT"
+    },
+    {
+      "name": "petal_width",
+      "type": "FLOAT"
+    }
+  ],
+  "output": [
+    {
+      "name": "probability",
+      "type": "DOUBLE",
+      "struct": "VECTOR"
+    }
+  ]
+}
