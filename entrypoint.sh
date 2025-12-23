@@ -16,8 +16,8 @@
 
 if [[ ! -z ${AIP_STORAGE_URI} ]]; then
     # Copy Mleap bundle from Cloud Storage
-    mkdir /tmp/model && gsutil cp -r ${AIP_STORAGE_URI} /tmp/model 2>&1
-    [[ "$?" -ne 0 ]] && echo "gsutil copy command failed. Inspect the copy command output for details." >&2 && exit 1
+    mkdir /tmp/model && gcloud storage cp --recursive ${AIP_STORAGE_URI} /tmp/model 2>&1
+    [[ "$?" -ne 0 ]] && echo "gcloud storage copy command failed. Inspect the copy command output for details." >&2 && exit 1
     # Move Mleap bundle to the location configured in application.properties
     find /tmp/model -name "model.zip" -exec mv -v {} /app \;
     [[ ! -f /app/model.zip ]] && echo "Model file at /app/model.zip does not exist. Does model.zip exist at ${AIP_STORAGE_URI}? Exiting." >&2 && exit 1
